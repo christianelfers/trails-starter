@@ -1,4 +1,5 @@
 messages:
+  appTitle: "Point Marker"
   ariaLabel:
     header: "Kopfleiste"
     footer: "Fussleiste mit Maßstabsangabe, Raumbezugssystem und Koordinatenanzeige"

@@ -10,7 +10,8 @@
             "Bash(timeout 10 pnpm dev:*)",
             "Bash(ls:*)",
             "Bash(cat:*)",
-            "Bash(timeout:*)"
+            "Bash(timeout:*)",
+            "Bash(git mv:*)"
         ]
     }
 }

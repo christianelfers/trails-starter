@@ -3,10 +3,12 @@
 import { createCustomElement } from "@open-pioneer/runtime";
 import * as appMetadata from "open-pioneer:app";
 import { MapApp } from "./MapApp";
+import { config } from "./theme/config";
 
 const element = createCustomElement({
     component: MapApp,
+    chakraSystemConfig: config,
     appMetadata
 });
 
-customElements.define("ol-map-app", element);
+customElements.define("point-marker-app", element);

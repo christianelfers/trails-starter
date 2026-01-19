@@ -1,4 +1,5 @@
 messages:
+  appTitle: "Point Marker"
   ariaLabel:
     header: "Header bar"
     footer: "Base bar with scale information, spatial reference system and coordinate display"

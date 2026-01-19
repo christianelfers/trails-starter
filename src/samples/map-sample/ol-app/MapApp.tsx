@@ -1,7 +1,6 @@
 // SPDX-FileCopyrightText: 2023-2025 Open Pioneer project (https://github.com/open-pioneer)
 // SPDX-License-Identifier: Apache-2.0
-import { Box, Flex, Separator, Text, VStack } from "@chakra-ui/react";
-import { BasemapSwitcher } from "@open-pioneer/basemap-switcher";
+import { Box, Flex } from "@chakra-ui/react";
 import { CoordinateViewer } from "@open-pioneer/coordinate-viewer";
 import { Geolocation } from "@open-pioneer/geolocation";
 import { DefaultMapProvider, MapAnchor, MapContainer, useMapModel } from "@open-pioneer/map";
@@ -9,15 +8,11 @@ import { InitialExtent, ZoomIn, ZoomOut } from "@open-pioneer/map-navigation";
 import { ToolButton } from "@open-pioneer/map-ui-components";
 import { Measurement } from "@open-pioneer/measurement";
 import { Notifier } from "@open-pioneer/notifier";
-import { OverviewMap } from "@open-pioneer/overview-map";
 import { SectionHeading, TitledSection } from "@open-pioneer/react-utils";
-import { ScaleBar } from "@open-pioneer/scale-bar";
 import { ScaleViewer } from "@open-pioneer/scale-viewer";
-import TileLayer from "ol/layer/Tile";
-import OSM from "ol/source/OSM";
 import { useIntl } from "open-pioneer:react-hooks";
 import { PointSketcher, ClearPointsButton, ExportPointsButton } from "point-sketcher";
-import { useId, useMemo, useState } from "react";
+import { useId, useState } from "react";
 import { LuRuler } from "react-icons/lu";
 import { MAP_ID } from "./services";
 
@@ -31,14 +26,6 @@ export function MapApp() {
         setMeasurementIsActive(!measurementIsActive);
     }
 
-    const overviewMapLayer = useMemo(
-        () =>
-            new TileLayer({
-                source: new OSM()
-            }),
-        []
-    );
-
     return (
         <Flex height="100%" direction="column" overflow="hidden">
             <Notifier />
@@ -47,12 +34,22 @@ export function MapApp() {
                     <Box
                         role="region"
                         aria-label={intl.formatMessage({ id: "ariaLabel.header" })}
-                        textAlign="center"
-                        py={1}
+                        bg="conterraBlue.500"
+                        color="white"
+                        py={3}
+                        px={4}
+                        boxShadow="md"
                     >
-                        <SectionHeading size={"md"}>
-                            Open Pioneer Trails - Map Sample
-                        </SectionHeading>
+                        <Flex
+                            alignItems="center"
+                            justifyContent="space-between"
+                            maxW="1400px"
+                            mx="auto"
+                        >
+                            <SectionHeading size="lg" color="white">
+                                {intl.formatMessage({ id: "appTitle" })}
+                            </SectionHeading>
+                        </Flex>
                     </Box>
                 }
             >
@@ -92,22 +89,6 @@ export function MapApp() {
                                         </Box>
                                     )}
                                 </MapAnchor>
-                                <MapAnchor position="top-right" horizontalGap={5} verticalGap={5}>
-                                    <Box
-                                        backgroundColor="white"
-                                        borderWidth="1px"
-                                        borderRadius="lg"
-                                        padding={2}
-                                        boxShadow="lg"
-                                        aria-label={intl.formatMessage({
-                                            id: "ariaLabel.topRight"
-                                        })}
-                                    >
-                                        <OverviewMap olLayer={overviewMapLayer} />
-                                        <Separator mt={4} />
-                                        <BasemapSwitcherComponent />
-                                    </Box>
-                                </MapAnchor>
                                 <MapAnchor
                                     position="bottom-right"
                                     horizontalGap={10}
@@ -120,6 +101,9 @@ export function MapApp() {
                                         direction="column"
                                         gap={1}
                                         padding={1}
+                                        backgroundColor="white"
+                                        borderRadius="lg"
+                                        boxShadow="md"
                                     >
                                         <ToolButton
                                             label={intl.formatMessage({ id: "measurementTitle" })}
@@ -141,30 +125,29 @@ export function MapApp() {
                         <Flex
                             role="region"
                             aria-label={intl.formatMessage({ id: "ariaLabel.footer" })}
+                            bg="conterraBlue.500"
+                            color="white"
                             gap={3}
+                            py={2}
+                            px={4}
                             alignItems="center"
-                            justifyContent="center"
+                            justifyContent="space-between"
                         >
-                            <CoordinateViewer precision={2} />
-                            <ScaleBar />
-                            <ScaleViewer />
+                            <Box backgroundColor="white" borderRadius="md" px={2} py={1}>
+                                <img
+                                    src="https://www.conterra.de/themes/conterra/logo.svg"
+                                    alt="con terra Logo"
+                                    style={{ width: "200px", height: "auto" }}
+                                />
+                            </Box>
+                            <Flex gap={3} alignItems="center">
+                                <CoordinateViewer precision={2} />
+                                <ScaleViewer />
+                            </Flex>
                         </Flex>
                     </DefaultMapProvider>
                 )}
             </TitledSection>
         </Flex>
-    );
-}
-
-function BasemapSwitcherComponent() {
-    const intl = useIntl();
-    const labelId = useId();
-    return (
-        <VStack align="start" mt={2} gap={1}>
-            <Text id={labelId} as="b" mb={1}>
-                {intl.formatMessage({ id: "basemapLabel" })}
-            </Text>
-            <BasemapSwitcher aria-labelledby={labelId} allowSelectingEmptyBasemap />
-        </VStack>
     );
 }

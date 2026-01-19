@@ -1,0 +1,13 @@
+messages:
+  pointSketcher:
+    buttonLabel: "Draw Points"
+  labelEdit:
+    placeholder: "Enter label..."
+    save: "Save"
+    cancel: "Cancel"
+    delete: "Delete"
+  clearPoints:
+    buttonLabel: "Clear All Points"
+    confirmMessage: "Delete all {count, plural, =1 {# point} other {# points}}?"
+  export:
+    buttonLabel: "Export Points"

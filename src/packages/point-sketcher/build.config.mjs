@@ -3,11 +3,11 @@
 import { defineBuildConfig } from "@open-pioneer/build-support";
 
 export default defineBuildConfig({
-    styles: "./app.css",
+    entryPoints: ["index"],
     i18n: ["en", "de"],
     services: {
-        MainMapProvider: {
-            provides: ["map.MapConfigProvider"]
+        PointSketcherServiceImpl: {
+            provides: "point-sketcher.PointSketcherService"
         }
     },
     ui: {

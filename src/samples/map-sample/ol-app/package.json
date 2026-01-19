@@ -18,6 +18,7 @@
         "@open-pioneer/scale-bar": "catalog:",
         "@open-pioneer/scale-viewer": "catalog:",
         "ol": "catalog:",
+        "point-sketcher": "workspace:^",
         "react": "catalog:",
         "react-dom": "catalog:",
         "react-icons": "catalog:",

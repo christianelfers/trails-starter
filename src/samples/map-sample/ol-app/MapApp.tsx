@@ -16,6 +16,7 @@ import { ScaleViewer } from "@open-pioneer/scale-viewer";
 import TileLayer from "ol/layer/Tile";
 import OSM from "ol/source/OSM";
 import { useIntl } from "open-pioneer:react-hooks";
+import { PointSketcher, ClearPointsButton, ExportPointsButton } from "point-sketcher";
 import { useId, useMemo, useState } from "react";
 import { LuRuler } from "react-icons/lu";
 import { MAP_ID } from "./services";
@@ -126,6 +127,9 @@ export function MapApp() {
                                             active={measurementIsActive}
                                             onClick={toggleMeasurement}
                                         />
+                                        <PointSketcher mapId={MAP_ID} />
+                                        <ClearPointsButton confirmBeforeClear />
+                                        <ExportPointsButton mapId={MAP_ID} />
                                         <Geolocation />
                                         <InitialExtent />
                                         <ZoomIn />

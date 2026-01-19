@@ -2,50 +2,136 @@
     "version": "2.0.0",
     "tasks": [
         {
-            "type": "npm",
-            "script": "build",
-            "group": "build",
-            "problemMatcher": [],
+            "type": "shell",
+            "command": "pnpm",
+            "args": ["build"],
+            "group": {
+                "kind": "build",
+                "isDefault": true
+            },
+            "problemMatcher": ["$tsc"],
             "label": "Build for production",
             "detail": "Outputs the production build to ./dist"
         },
         {
-            "type": "npm",
-            "script": "preview",
+            "type": "shell",
+            "command": "pnpm",
+            "args": ["preview"],
             "problemMatcher": [],
             "label": "Run local web server",
-            "detail": "Requires built project in ./dist (run npm build first)"
+            "detail": "Requires built project in ./dist (run pnpm build first)",
+            "isBackground": true,
+            "presentation": {
+                "reveal": "always",
+                "panel": "dedicated"
+            }
         },
         {
-            "type": "npm",
-            "script": "dev",
+            "type": "shell",
+            "command": "pnpm",
+            "args": ["dev"],
             "group": "test",
-            "problemMatcher": ["$vite"],
+            "problemMatcher": ["$tsc"],
             "label": "Run development server",
-            "detail": "Starts vite in development mode"
+            "detail": "Starts vite in development mode",
+            "isBackground": true,
+            "presentation": {
+                "reveal": "always",
+                "panel": "dedicated",
+                "group": "dev"
+            }
         },
         {
-            "type": "npm",
-            "script": "test",
+            "type": "shell",
+            "command": "pnpm",
+            "args": ["test"],
             "group": {
                 "kind": "test",
                 "isDefault": true
             },
-            "problemMatcher": ["$vite"],
+            "problemMatcher": ["$tsc"],
             "label": "Run tests",
-            "detail": "Starts vitest in development mode (interactive)"
+            "detail": "Starts vitest in development mode (interactive)",
+            "isBackground": true,
+            "presentation": {
+                "reveal": "always",
+                "panel": "dedicated",
+                "group": "test"
+            }
         },
         {
             "type": "shell",
             "command": "pnpm",
             "args": ["exec", "vitest", "--", "run", "--run"],
             "group": "test",
-            "problemMatcher": ["$vite"],
+            "problemMatcher": ["$tsc"],
             // Faking a CI environment because somehow vite defaults to watch mode when
             // started from within a task (run --run should REALLY disable watch mode)
             "options": { "env": { "CI": "1" } },
             "label": "Run all tests",
             "detail": "Runs all tests and exits"
+        },
+        {
+            "type": "shell",
+            "command": "pnpm",
+            "args": ["lint"],
+            "problemMatcher": ["$eslint-stylish"],
+            "label": "Lint",
+            "detail": "Run ESLint on src and support folders"
+        },
+        {
+            "type": "shell",
+            "command": "pnpm",
+            "args": ["check-types"],
+            "problemMatcher": ["$tsc"],
+            "label": "Check Types",
+            "detail": "Run TypeScript type checking without emitting"
+        },
+        {
+            "type": "shell",
+            "command": "pnpm",
+            "args": ["watch-types"],
+            "problemMatcher": ["$tsc-watch"],
+            "label": "Watch Types",
+            "detail": "Run TypeScript type checking in watch mode",
+            "isBackground": true,
+            "presentation": {
+                "reveal": "always",
+                "panel": "dedicated",
+                "group": "dev"
+            }
+        },
+        {
+            "type": "shell",
+            "command": "pnpm",
+            "args": ["prettier"],
+            "problemMatcher": [],
+            "label": "Format",
+            "detail": "Format code with Prettier"
+        },
+        {
+            "type": "shell",
+            "command": "pnpm",
+            "args": ["prettier-check"],
+            "problemMatcher": [],
+            "label": "Format Check",
+            "detail": "Check code formatting with Prettier"
+        },
+        {
+            "type": "shell",
+            "command": "pnpm",
+            "args": ["clean"],
+            "problemMatcher": [],
+            "label": "Clean",
+            "detail": "Remove dist folders"
+        },
+        {
+            "type": "shell",
+            "command": "pnpm",
+            "args": ["build-docs"],
+            "problemMatcher": [],
+            "label": "Build Documentation",
+            "detail": "Generate documentation with TypeDoc"
         }
     ]
 }

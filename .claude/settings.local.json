@@ -11,7 +11,9 @@
             "Bash(ls:*)",
             "Bash(cat:*)",
             "Bash(timeout:*)",
-            "Bash(git mv:*)"
+            "Bash(git mv:*)",
+            "WebFetch",
+            "Bash(move:*)"
         ]
     }
 }
